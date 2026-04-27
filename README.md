@@ -1,27 +1,87 @@
-# Adro Frontend
+# Adro
 
 <!-- badges start -->
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Next.js](https://img.shields.io/badge/Next.js-14+-000000?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Discord](https://img.shields.io/badge/Discord-7289DA?style=flat&logo=discord)](https://discord.gg/adro)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/adro?style=flat&logo=github)](https://github.com/yourusername/adro/stargazers)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-009989?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![GitHub Stars](https://img.shields.io/github/stars/EquilibrateAI/Adro?style=flat&logo=github)](https://github.com/EquilibrateAI/Adro/stargazers)
 
 <!-- badges end -->
 
-> AI-powered data analytics and dashboard modeling application
+---
 
-Adro is an AI-powered data analytics and dashboard modeling application Using Next.js, and a Python backend.
+## About Adro
 
-Adro Frontend is a Next.js/React application that provides an analytics workspace for:
+Adro is an AI-powered data analytics platform that transforms raw data into intelligent, interactive dashboards within seconds. Built using advanced AI models like Claude 4.6, Adro eliminates the complexity of traditional business intelligence tools.
 
-- Exploring and cleaning data
-- Building AI‑assisted charts and dashboards
-- Running prediction and optimization workflows
+Simply upload your dataset in CSV or Excel format, and Adro instantly generates dashboards complete with:
 
-The frontend talks to a separate backend over HTTP. The backend is treated as a **black‑box API**: this project does not assume or document any backend implementation details beyond the fact that certain routes exist and return the required data.
+- Key performance metrics
+- Interactive visualizations
+- Trend analysis
+- Actionable business insights
+
+There is no need for coding, manual configuration, or technical expertise. Adro automatically understands your data structure, detects meaningful patterns, and presents insights in a clear, business-ready format.
+
+Whether you are a founder, analyst, operations manager, or enterprise team, Adro helps you make faster, data-driven decisions effortlessly.
+
+---
+
+## How Adro Works
+
+### 1. Registration & Approval
+
+Users register on the Adro website. Once registered, the admin team reviews and approves the account. After approval, login credentials are shared with the user.
+
+### 2. Login & Initial Credits
+
+Upon first login, users receive 10 complimentary credits, allowing them to start generating dashboards immediately.
+
+- 1 credit = $1
+- 1 dashboard generation = 1 credit
+
+### 3. Upload Your Data
+
+Users can upload up to 5 documents at a time in either:
+
+- CSV format
+- Excel format
+
+### 4. Ask Questions in Natural English
+
+After uploading the dataset, users can ask questions in simple, everyday English no technical queries required.
+
+For example:
+
+- "Show revenue trends over time."
+- "Which product performed best?"
+- "Give me a summary of monthly performance."
+
+Adro processes the request and instantly generates accurate, AI-powered insights and dashboards.
+
+### 5. Credit System
+
+Once credits are used:
+
+- Users can navigate to Settings
+- Add additional credits
+- Credits are billed at $1 per credit
+
+This ensures flexible, usage-based pricing.
+
+### 6. Export & Share
+
+Generated dashboards can be exported in multiple formats for reporting and presentation:
+
+- PNG
+- JPG
+- Excel
+- PDF
+
+This makes it easy to use dashboards for business reviews, client presentations, or internal reporting.
 
 ---
 
