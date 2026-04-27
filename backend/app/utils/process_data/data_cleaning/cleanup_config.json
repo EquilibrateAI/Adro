@@ -1,0 +1,7 @@
+{
+    "numeric_pct": 0.95,
+    "null_replacement": "avg",
+    "decimal_points": 2,
+    "type_pct_threshold": 0.8,
+    "null_threshold": 0.6
+}
