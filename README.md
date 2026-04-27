@@ -659,11 +659,79 @@ Two ML-style workflows in `/modeling`:
 
 ## Deployment
 
-### Vercel (Recommended for Next.js)
+Adro requires both the frontend and backend to be running. The application consists of:
+
+- **Frontend**: Next.js app running on port 3000
+- **Backend**: FastAPI server running on port 8000
+
+Both services must be running for the application to function properly.
+
+### Development Deployment
+
+```bash
+# Terminal 1 - Start the backend
+cd backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+cd app
+uvicorn main:app --reload --port 8000
+
+# Terminal 2 - Start the frontend
+cd frontend
+npm run dev
+```
+
+The frontend will be available at [http://localhost:3000](http://localhost:3000) and will communicate with the backend at [http://localhost:8000](http://localhost:8000).
+
+### Production Deployment
+
+#### Option 1: Local Production
+
+```bash
+# Backend
+cd backend
+source venv/bin/activate
+cd app
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+# Frontend
+cd frontend
+npm run build
+npm start
+```
+
+#### Option 2: Docker Compose
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+```bash
+docker-compose up --build
+```
+
+#### Option 3: Vercel (Frontend Only)
+
+For deploying only the frontend to Vercel (requires a separate backend URL):
 
 1. Push your code to GitHub
 2. Import the project in Vercel
-3. Configure environment variables
+3. Configure `NEXT_PUBLIC_API_URL` environment variable to point to your backend
 4. Deploy
 
 ```bash
@@ -672,29 +740,26 @@ npm i -g vercel
 vercel
 ```
 
-### Docker
+### Environment Variables
 
-```dockerfile
-# Dockerfile
-FROM node:18-alpine
+Both frontend and backend require specific environment variables to run properly.
 
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci
-
-COPY . .
-
-RUN npm run build
-
-EXPOSE 3000
-CMD ["npm", "start"]
-```
+#### Frontend (.env)
 
 ```bash
-# Build and run
-docker build -t adro-frontend .
-docker run -p 3000:3000 adro-frontend
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+#### Backend (.env)
+
+```bash
+# LLM Provider API Keys (at least one required)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-...
+GOOGLE_API_KEY=...
+
+# Database (optional)
+DATABASE_URL=postgresql://...
 ```
 
 ## Contributing
