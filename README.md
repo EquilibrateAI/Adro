@@ -83,6 +83,8 @@ Supports multiple LLM providers:
 
 ## Tech Stack
 
+### Frontend
+
 | Category         | Technology                                    | Version          |
 | ---------------- | --------------------------------------------- | ---------------- |
 | Framework        | [Next.js](https://nextjs.org/)                | 14+ (App Router) |
@@ -93,6 +95,20 @@ Supports multiple LLM providers:
 | UI Components    | [Radix UI](https://www.radix-ui.com/)         | 1.0+             |
 | Charts           | [ECharts](https://echarts.apache.org/)        | 5+               |
 | HTTP Client      | Fetch API                                     | -                |
+
+### Backend
+
+| Category         | Technology                                    | Version          |
+| ---------------- | --------------------------------------------- | ---------------- |
+| Framework        | [FastAPI](https://fastapi.tiangolo.com/)      | 0.109+          |
+| Language        | [Python](https://www.python.org/)           | 3.11+            |
+| Database        | [DuckDB](https://duckdb.org/)             | -                |
+| Data Processing | [Polars](https://www.pola.rs/)            | -                |
+| ML Library      | [XGBoost](https://xgboost.readthedocs.io/) | -                |
+| Optimization   | [Optuna](https://optuna.org/)            | -                |
+| LLM Integration | [Anthropic](https://www.anthropic.com/)    | -                |
+|                 | [OpenAI](https://platform.openai.com/)    | -                |
+|                 | [Google AI](https://ai.google.dev/)     | -                |
 
 ---
 
@@ -252,23 +268,38 @@ export default nextConfig;
 ## Project Structure
 
 ```
-my-adro/
-├── app/                     # Next.js App Router pages
-│   ├── layout.tsx           # Root layout with providers
-│   ├── page.tsx             # Home/landing page
-│   ├── data/                # Data management routes
-│   │   ├── page.tsx         # Data main page
-│   │   └── layout.tsx       # Data layout with sidebar
-│   ├── dashboard/           # AI Assistant routes
-│   │   ├── page.tsx         # Dashboard main page
-│   │   └── layout.tsx       # Dashboard layout
-│   └── modeling/            # Prediction & Optimization routes
-│       ├── page.tsx         # Modeling main page
-│       └── layout.tsx       # Modeling layout
-├── components/              # React components
-│   ├── data/                # Data management components
-│   │   ├── sidebar/         # Connection & file sidebar
-│   │   ├── table/           # Table components
+adro/                      # Monorepo root
+├── frontend/              # Next.js/React application
+│   ├── app/               # Next.js App Router pages
+│   │   ├── data/         # Data management routes
+│   │   ├── dashboard/    # AI Dashboard routes
+│   │   ├── modeling/    # Prediction & Optimization routes
+│   │   └── settings/    # Settings routes
+│   ├── components/       # React components
+│   │   ├── data/        # Data management components
+│   │   ├── dashboard/   # Dashboard components
+│   │   ├── modeling/   # Modeling components
+│   │   └── ui/        # Shared UI components
+│   ├── services/         # API clients and state
+│   │   ├── api/        # API endpoint functions
+│   │   └── utils/     # Stores and utilities
+│   └── public/         # Static assets
+├── backend/             # Python/FastAPI application
+│   ├── app/
+│   │   ├── api/       # API route handlers
+│   │   │   ├── data/       # Data endpoints
+│   │   │   ├── dashboard/  # Dashboard endpoints
+│   │   │   ├── modeling/  # Prediction & Optimization
+│   │   │   └── settings/  # Settings endpoints
+│   │   └── utils/    # Business logic
+│   │       ├── dashboard/    # Dashboard helpers
+│   │       ├── prediction/  # ML models
+│   │       └── optimization/ # Optuna optimizers
+│   └── requirements.txt  # Python dependencies
+├── CONTRIBUTING.md     # Contribution guidelines
+├── LICENSE            # Apache 2.0 license
+└── README.md         # This file
+```
 │   │   ├── chart/           # Chart builder
 │   │   ├── files/           # File upload components
 │   │   └── filter/          # Filter components
