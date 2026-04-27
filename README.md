@@ -15,158 +15,75 @@
 
 ## About Adro
 
-Adro is an AI-powered data analytics platform that transforms raw data into intelligent, interactive dashboards within seconds. Built using advanced AI models like Claude 4.6, Adro eliminates the complexity of traditional business intelligence tools.
+Adro is an AI-powered data analytics tool that runs entirely offline on your local machine. It transforms raw data into intelligent, interactive dashboards and actionable insights without requiring any cloud services or internet connection.
 
-Simply upload your dataset in CSV or Excel format, and Adro instantly generates dashboards complete with:
+Simply upload your dataset in CSV format, and Adro provides:
 
-- Key performance metrics
-- Interactive visualizations
-- Trend analysis
-- Actionable business insights
+- Data viewing and exploration
+- Interactive charts and visualizations
+- Anomaly detection and data cleaning
+- AI-powered dashboard generation via natural language
+- Prediction modeling
+- Optimization workflows
 
-There is no need for coding, manual configuration, or technical expertise. Adro automatically understands your data structure, detects meaningful patterns, and presents insights in a clear, business-ready format.
-
-Whether you are a founder, analyst, operations manager, or enterprise team, Adro helps you make faster, data-driven decisions effortlessly.
-
----
-
-## How Adro Works
-
-### 1. Registration & Approval
-
-Users register on the Adro website. Once registered, the admin team reviews and approves the account. After approval, login credentials are shared with the user.
-
-### 2. Login & Initial Credits
-
-Upon first login, users receive 10 complimentary credits, allowing them to start generating dashboards immediately.
-
-- 1 credit = $1
-- 1 dashboard generation = 1 credit
-
-### 3. Upload Your Data
-
-Users can upload up to 5 documents at a time in either:
-
-- CSV format
-- Excel format
-
-### 4. Ask Questions in Natural English
-
-After uploading the dataset, users can ask questions in simple, everyday English no technical queries required.
-
-For example:
-
-- "Show revenue trends over time."
-- "Which product performed best?"
-- "Give me a summary of monthly performance."
-
-Adro processes the request and instantly generates accurate, AI-powered insights and dashboards.
-
-### 5. Credit System
-
-Once credits are used:
-
-- Users can navigate to Settings
-- Add additional credits
-- Credits are billed at $1 per credit
-
-This ensures flexible, usage-based pricing.
-
-### 6. Export & Share
-
-Generated dashboards can be exported in multiple formats for reporting and presentation:
-
-- PNG
-- JPG
-- Excel
-- PDF
-
-This makes it easy to use dashboards for business reviews, client presentations, or internal reporting.
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Why Adro?](#why-adro)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-  - [Clone the Repository](#1-clone-the-repository)
-  - [Install Dependencies](#2-install-dependencies)
-  - [Environment Setup](#3-environment-setup)
-- [Configuration](#configuration)
-  - [Environment Variables](#environment-variables)
-  - [Next.js Configuration](#nextjs-configuration)
-- [Project Structure](#project-structure)
-- [Development](#development)
-  - [Running the Development Server](#running-the-development-server)
-  - [Building for Production](#building-for-production)
-  - [Code Quality](#code-quality)
-- [Architecture](#architecture)
-  - [High-Level Architecture](#high-level-architecture)
-  - [State Management](#state-management)
-  - [API Integration](#api-integration)
-- [Feature Areas](#feature-areas)
-  - [/data – Data Management](#data--data-management)
-    - [Sidebar Connections & Files](#1-sidebar-connections--files)
-    - [File Upload & Database Connection](#2-file-upload--database-connection)
-    - [Data Table](#3-data-table)
-    - [Data Cleaning](#4-data-cleaning)
-    - [Data Chart](#5-data-chart)
-  - [/dashboard – AI Assistant](#dashboard--ai-assistant)
-    - [AI Assistant Interface](#1-ai-assistant-interface)
-    - [Text Mode](#text-mode)
-    - [Chart Mode](#chart-mode)
-    - [Dashboard Mode](#dashboard-mode)
-    - [Column Info Sidebar](#2-column-info-sidebar-in-dashboard)
-  - [/modeling – Predict & Optimize](#modeling--predict--optimize)
-    - [Predict](#predict)
-    - [Optimize](#optimize)
-- [Deployment](#deployment)
-  - [Vercel](#vercel)
-  - [Docker](#docker)
-- [Contributing](#contributing)
-  - [Getting Started](#getting-started)
-  - [Development Workflow](#development-workflow)
-  - [Code Style](#code-style)
-  - [Pull Request Guidelines](#pull-request-guidelines)
-- [Code of Conduct](#code-of-conduct)
-- [Security](#security)
-- [Community](#community)
-- [License](#license)
-- [Support](#support)
-- [Acknowledgments](#acknowledgments)
-- [FAQ](#faq)
+All data stays on your machine. No accounts, no credits, no internet required.
 
 ---
 
 ## Features
 
-- **Dynamic Data Dashboards** - Create and customize interactive dashboards with KPIs, charts, and tables
-- **AI-Driven Insights** - Get intelligent analysis, recommendations, and natural language responses
-- **Data Management** - Connect to databases (PostgreSQL), upload files (CSV, DuckDB), clean and transform data
-- **Chart Builder** - Visualize data with AI-assisted chart creation
-- **Prediction Models** - Build and run predictive models with R² and RMSE metrics
-- **Optimization** - Find optimal settings to achieve target goals
-- **Search, Sort & Filter** - Powerful data manipulation capabilities
-- **Column Statistics** - View detailed column metadata including min, max, mean, missing values
+### Data Management
+
+- Upload CSV datasets
+- View data as interactive tables
+- Build charts manually (8 chart types)
+- Detect and clean anomalies
+- Column statistics and metadata
+
+### AI Dashboard
+
+The most powerful feature. Ask questions in natural language about your dataset, and Adro generates:
+
+- Interactive dashboards
+- Visualizations
+- Text responses with insights
+
+Supports multiple LLM providers:
+
+- OpenAI
+- Anthropic Claude
+- Google Gemini
+- Local LLMs (Ollama, Llama.cpp)
+
+### Modeling
+
+- **Predict**: Select a target variable, input predictor values, and get predictions
+- **Optimize**: Define a target value or range, and Adro calculates the optimized predictor values
 
 ---
 
-## Why Adro?
+## Table of Contents
 
-Adro bridges the gap between complex data analysis and user-friendly interfaces. Here's why developers and data analysts choose Adro:
-
-1. **AI-Powered** - Leverage AI for data insights, chart generation, and predictive modeling
-2. **Open Source** - Fully transparent, customizable, and free to use
-3. **Extensible** - Modular architecture allows easy customization and extension
-4. **Modern Stack** - Built with the latest technologies for optimal performance
+- [About Adro](#about-adro)
+- [Features](#features)
+  - [Data Management](#data-management)
+  - [AI Dashboard](#ai-dashboard)
+  - [Modeling](#modeling)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Development](#development)
+- [Architecture](#architecture)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## Tech Stack
+
+### Frontend
 
 | Category         | Technology                                    | Version          |
 | ---------------- | --------------------------------------------- | ---------------- |
@@ -179,14 +96,27 @@ Adro bridges the gap between complex data analysis and user-friendly interfaces.
 | Charts           | [ECharts](https://echarts.apache.org/)        | 5+               |
 | HTTP Client      | Fetch API                                     | -                |
 
+### Backend
+
+| Category         | Technology                                    | Version          |
+| ---------------- | --------------------------------------------- | ---------------- |
+| Framework        | [FastAPI](https://fastapi.tiangolo.com/)      | 0.109+          |
+| Language        | [Python](https://www.python.org/)           | 3.11+            |
+| Database        | [DuckDB](https://duckdb.org/)             | -                |
+| Data Processing | [Polars](https://www.pola.rs/)            | -                |
+| ML Library      | [XGBoost](https://xgboost.readthedocs.io/) | -                |
+| Optimization   | [Optuna](https://optuna.org/)            | -                |
+| LLM Integration | [Anthropic](https://www.anthropic.com/)    | -                |
+|                 | [OpenAI](https://platform.openai.com/)    | -                |
+|                 | [Google AI](https://ai.google.dev/)     | -                |
+
 ---
 
 ## Prerequisites
 
+- **Python** 3.11 or higher
 - **Node.js** v18 or higher
 - **npm** v9 or higher (or yarn/pnpm)
-- **Rust Toolchain** - Run `rustup update` to keep Rust up to date
-- A running backend server (API endpoints)
 
 ### Recommended Tools
 
@@ -200,19 +130,25 @@ Adro bridges the gap between complex data analysis and user-friendly interfaces.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/adro.git
-cd adro
+git clone https://github.com/EquilibrateAI/Adro.git
+cd Adro
 
-# Navigate to frontend
-cd my-adro
-
-# Install dependencies
+# Set up the frontend
+cd frontend
 npm install
-
-# Set up environment variables
 cp .env.example .env
 
-# Start development server
+# In another terminal, set up the backend
+cd ../backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Run backend
+cd app
+uvicorn main:app --reload --port 8000
+
+# Run frontend (from frontend directory)
 npm run dev
 ```
 
@@ -332,23 +268,38 @@ export default nextConfig;
 ## Project Structure
 
 ```
-my-adro/
-├── app/                     # Next.js App Router pages
-│   ├── layout.tsx           # Root layout with providers
-│   ├── page.tsx             # Home/landing page
-│   ├── data/                # Data management routes
-│   │   ├── page.tsx         # Data main page
-│   │   └── layout.tsx       # Data layout with sidebar
-│   ├── dashboard/           # AI Assistant routes
-│   │   ├── page.tsx         # Dashboard main page
-│   │   └── layout.tsx       # Dashboard layout
-│   └── modeling/            # Prediction & Optimization routes
-│       ├── page.tsx         # Modeling main page
-│       └── layout.tsx       # Modeling layout
-├── components/              # React components
-│   ├── data/                # Data management components
-│   │   ├── sidebar/         # Connection & file sidebar
-│   │   ├── table/           # Table components
+adro/                      # Monorepo root
+├── frontend/              # Next.js/React application
+│   ├── app/               # Next.js App Router pages
+│   │   ├── data/         # Data management routes
+│   │   ├── dashboard/    # AI Dashboard routes
+│   │   ├── modeling/    # Prediction & Optimization routes
+│   │   └── settings/    # Settings routes
+│   ├── components/       # React components
+│   │   ├── data/        # Data management components
+│   │   ├── dashboard/   # Dashboard components
+│   │   ├── modeling/   # Modeling components
+│   │   └── ui/        # Shared UI components
+│   ├── services/         # API clients and state
+│   │   ├── api/        # API endpoint functions
+│   │   └── utils/     # Stores and utilities
+│   └── public/         # Static assets
+├── backend/             # Python/FastAPI application
+│   ├── app/
+│   │   ├── api/       # API route handlers
+│   │   │   ├── data/       # Data endpoints
+│   │   │   ├── dashboard/  # Dashboard endpoints
+│   │   │   ├── modeling/  # Prediction & Optimization
+│   │   │   └── settings/  # Settings endpoints
+│   │   └── utils/    # Business logic
+│   │       ├── dashboard/    # Dashboard helpers
+│   │       ├── prediction/  # ML models
+│   │       └── optimization/ # Optuna optimizers
+│   └── requirements.txt  # Python dependencies
+├── CONTRIBUTING.md     # Contribution guidelines
+├── LICENSE            # Apache 2.0 license
+└── README.md         # This file
+```
 │   │   ├── chart/           # Chart builder
 │   │   ├── files/           # File upload components
 │   │   └── filter/          # Filter components
@@ -739,11 +690,79 @@ Two ML-style workflows in `/modeling`:
 
 ## Deployment
 
-### Vercel (Recommended for Next.js)
+Adro requires both the frontend and backend to be running. The application consists of:
+
+- **Frontend**: Next.js app running on port 3000
+- **Backend**: FastAPI server running on port 8000
+
+Both services must be running for the application to function properly.
+
+### Development Deployment
+
+```bash
+# Terminal 1 - Start the backend
+cd backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+cd app
+uvicorn main:app --reload --port 8000
+
+# Terminal 2 - Start the frontend
+cd frontend
+npm run dev
+```
+
+The frontend will be available at [http://localhost:3000](http://localhost:3000) and will communicate with the backend at [http://localhost:8000](http://localhost:8000).
+
+### Production Deployment
+
+#### Option 1: Local Production
+
+```bash
+# Backend
+cd backend
+source venv/bin/activate
+cd app
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+# Frontend
+cd frontend
+npm run build
+npm start
+```
+
+#### Option 2: Docker Compose
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+```bash
+docker-compose up --build
+```
+
+#### Option 3: Vercel (Frontend Only)
+
+For deploying only the frontend to Vercel (requires a separate backend URL):
 
 1. Push your code to GitHub
 2. Import the project in Vercel
-3. Configure environment variables
+3. Configure `NEXT_PUBLIC_API_URL` environment variable to point to your backend
 4. Deploy
 
 ```bash
@@ -752,29 +771,26 @@ npm i -g vercel
 vercel
 ```
 
-### Docker
+### Environment Variables
 
-```dockerfile
-# Dockerfile
-FROM node:18-alpine
+Both frontend and backend require specific environment variables to run properly.
 
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci
-
-COPY . .
-
-RUN npm run build
-
-EXPOSE 3000
-CMD ["npm", "start"]
-```
+#### Frontend (.env)
 
 ```bash
-# Build and run
-docker build -t adro-frontend .
-docker run -p 3000:3000 adro-frontend
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+#### Backend (.env)
+
+```bash
+# LLM Provider API Keys (at least one required)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-...
+GOOGLE_API_KEY=...
+
+# Database (optional)
+DATABASE_URL=postgresql://...
 ```
 
 ## Contributing
