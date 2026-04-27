@@ -1,0 +1,91 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+const dataSources = {
+    "dataSources": [
+        {
+            "id": "sales-db",
+            "name": "Sales Database",
+            "type": "mysql",
+            "icon": "🐬",
+            "status": "connected",
+            "createdAt": "6 Jun,2025",
+            "size": "5.2 MB",
+            "tables": [
+                {"name": "sales_data", "rows": 15420, "columns": 8},
+                {"name": "customers", "rows": 3240, "columns": 12},
+                {"name": "products", "rows": 856, "columns": 6},
+                {"name": "orders", "rows": 9876, "columns": 10},
+            ],
+        },
+        {
+            "id": "customer-analytics",
+            "name": "Customer Analytics",
+            "type": "postgresql",
+            "icon": "🐘",
+            "status": "connected",
+            "createdAt": "12 Jun,2024",
+            "size": "9.1 MB",
+            "tables": [
+                {"name": "user_behavior", "rows": 45230, "columns": 15},
+                {"name": "sessions", "rows": 123450, "columns": 8},
+                {"name": "events", "rows": 567890, "columns": 12},
+            ],
+        },
+        {
+            "id": "inventory-system",
+            "name": "Inventory System",
+            "type": "mongodb",
+            "icon": "🍃",
+            "status": "connected",
+            "createdAt": "26 Jan,2025",
+            "size": "3.5 MB",
+            "tables": [
+                {"name": "inventory", "rows": 2340, "columns": 9},
+                {"name": "suppliers", "rows": 145, "columns": 7},
+            ],
+        },
+        {
+            "id": "financial-reports",
+            "name": "Financial Reports",
+            "type": "sqlite",
+            "icon": "📁",
+            "status": "connected",
+            "createdAt": "16 Feb,2024",
+            "size": "2.1 MB",
+            "tables": [
+                {"name": "transactions", "rows": 8765, "columns": 11},
+                {"name": "accounts", "rows": 234, "columns": 5},
+            ],
+        },
+        {
+            "id": "marketing-data-csv",
+            "name": "Marketing Campaign Data",
+            "type": "csv",
+            "icon": "📊",
+            "status": "connected",
+            "createdAt": "6 July,2023",
+            "size": "5.9 MB",
+            "fileInfo": {"rows": 12450, "columns": 11},
+        },
+        {
+            "id": "customer-survey",
+            "name": "Customer Survey Results",
+            "type": "excel",
+            "icon": "📈",
+            "status": "connected",
+            "createdAt": "3 Jun,2021",
+            "size": "25 MB",
+            "fileInfo": {"rows": 3420, "columns": 17},
+        },
+        {
+            "id": "web-analytics",
+            "name": "Web Analytics Export",
+            "type": "json",
+            "icon": "📋",
+            "status": "connected",
+            "createdAt": "19 Feb,2022",
+            "size": "52 MB",
+            "fileInfo": {"rows": 23450, "columns": 12},
+        },
+    ]
+}
