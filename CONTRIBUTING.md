@@ -82,25 +82,21 @@ We use GitHub issues to track public bugs. Report a bug by opening a new issue; 
 ### Project Structure
 
 ```
-adro/
-├── app/                    # Next.js App Router pages
-│   ├── data/              # Data management routes
-│   ├── dashboard/         # Dashboard routes
-│   └── modeling/          # Modeling routes
-├── components/            # React components
-│   ├── data/             # Data-related components
-│   ├── dashboard/        # Dashboard components
-│   └── modeling/         # Modeling components
-├── services/             # API and business logic
-│   ├── api/              # Low-level API client functions
-│   └── utils/            # High-level utilities and stores
-│       └── dashboard/    # Dashboard stores and helpers
-├── types/                # TypeScript type definitions
-├── public/               # Static assets
-└── styles/              # Global styles
+adro/                      # Monorepo root
+├── frontend/              # Next.js/React application
+│   ├── app/               # Next.js App Router pages
+│   ├── components/         # React components
+│   ├── services/         # API clients and stores
+│   └── public/            # Static assets
+├── backend/               # Python/FastAPI application
+│   ├── app/
+│   │   ├── api/          # API route handlers
+│   │   └── utils/        # Business logic
+│   └── requirements.txt  # Python dependencies
+└── README.md             # Main documentation
 ```
 
-### Naming Conventions
+### Naming Conventions (Frontend)
 
 | Type | Convention | Example |
 |------|------------|---------|
@@ -720,6 +716,205 @@ When adding new features, update README:
 - Add to feature section
 - Document API endpoints used
 - Update architecture diagrams
+
+---
+
+---
+
+## Backend Development (Python/FastAPI)
+
+This project contains a Python FastAPI backend located in the `backend/` directory.
+
+### 1. Setting Up Your Environment
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Linux/Mac:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 2. Running the Backend
+
+```bash
+# Run the FastAPI server
+cd backend/app
+uvicorn main:app --reload --port 8000
+```
+
+### 3. Project Structure
+
+```
+backend/
+├── app/
+│   ├── api/                      # API route handlers
+│   │   ├── data/                 # Data endpoints (upload, cleaning, tables)
+│   │   ├── dashboard/            # Dashboard generation endpoints
+│   │   ├── modeling/            # Prediction & optimization endpoints
+│   │   └── settings/            # Settings endpoints
+│   ├── utils/                    # Business logic and utilities
+│   │   ├── dashboard/           # Dashboard helper functions
+│   │   ├── optimization/       # Optimization algorithms
+│   │   ├── prediction/         # ML model utilities
+│   │   └── process_data/      # Data processing utilities
+│   ├── config.py               # FastAPI configuration
+│   └── main.py                 # Application entry point
+├── requirements.txt            # Python dependencies
+└── README.md                   # Backend-specific documentation
+```
+
+### 4. Coding Standards (PEP 8)
+
+#### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Modules | snake_case | `data_cleaning.py` |
+| Classes | PascalCase | `DataCleaner` |
+| Functions | snake_case | `clean_dataframe()` |
+| Constants | SCREAMING_SNAKE_CASE | `MAX_FILE_SIZE` |
+| Variables | snake_case | `file_path` |
+
+#### File Organization
+
+- **Keep related logic together**: API routes in `api/`, business logic in `utils/`
+- **Use descriptive names**: `fetch_connection_details.py`, not `fetch.py`
+- **Modular functions**: Small, focused functions with single responsibilities
+- **Type hints**: Always add type hints for function parameters and return values
+
+#### Python Guidelines
+
+```python
+# Good: Type hints and docstrings
+def clean_dataframe(
+    df: pl.DataFrame,
+    cleaning_steps: dict,
+) -> pl.DataFrame:
+    """Apply cleaning steps to a Polars DataFrame.
+
+    Args:
+        df: Input DataFrame to clean.
+        cleaning_steps: Dictionary of cleaning configuration.
+
+    Returns:
+        Cleaned DataFrame.
+    """
+    # ... implementation
+    return cleaned_df
+
+# Good: Pydantic models for request validation
+from pydantic import BaseModel
+
+
+class CleanDataRequest(BaseModel):
+    file_name: str
+    cleaning_steps: dict
+
+# Good: FastAPI router with tags
+from fastapi import APIRouter
+
+router = APIRouter(tags=["Data Cleaning"])
+
+
+@router.post("/clean-data")
+async def clean_data(request: CleanDataRequest):
+    # ... implementation
+    pass
+
+# Good: Logging
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@router.get("/data")
+async def get_data():
+    logger.info("Fetching data")
+    # ... implementation
+```
+
+#### Error Handling
+
+```python
+# Good: Use try/except with logging
+import logging
+import traceback
+
+logger = logging.getLogger(__name__)
+
+
+try:
+    result = process_data()
+    return JSONResponse(status_code=200, content={"data": result})
+except FileNotFoundError as e:
+    logger.warning(f"File not found: {e}")
+    return JSONResponse(status_code=404, content={"error": "File not found"})
+except Exception as e:
+    logger.error(f"Error processing data: {str(e)}")
+    traceback.print_exc()
+    return JSONResponse(status_code=500, content={"error": "Internal server error"})
+```
+
+#### Database Operations
+
+```python
+# Good: Use DuckDB for analytics
+import duckdb
+
+
+def query_table(file_path: str, table_name: str):
+    conn = duckdb.connect(file_path)
+    result = conn.execute(f"SELECT * FROM {table_name} LIMIT 100").df()
+    conn.close()
+    return result
+
+# Good: Use Polars for data processing
+import polars as pl
+
+
+def transform_data(df: pl.DataFrame) -> pl.DataFrame:
+    return df.filter(pl.col("value") > 0).select(["col1", "col2"])
+```
+
+### 5. API Development Patterns
+
+#### Route Organization
+
+```python
+# Each feature gets its own router file
+from fastapi import APIRouter
+
+router = APIRouter(prefix="/data", tags=["Data Management"])
+
+
+@router.post("/upload")
+async def upload_file(file: UploadFile):
+    # ... implementation
+    pass
+```
+
+#### Testing Backend
+
+```bash
+# Run with pytest
+pytest
+
+# Run specific test file
+pytest tests/test_data_cleaning.py
+
+# Run with coverage
+pytest --cov=app --cov-report=html
+```
 
 ---
 
