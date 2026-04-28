@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -44,4 +44,4 @@ def ml_model_predictor(request: MLPayload) -> JSONResponse:
 
     except Exception as e:
         logger.error("Error while predicting: %s", str(e))
-        return JSONResponse(content={"error": str(e)}, status_code=500)
+        raise HTTPException(status_code=500, detail=str(e))
