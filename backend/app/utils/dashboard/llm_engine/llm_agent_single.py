@@ -29,8 +29,6 @@ def load_model() -> Any:
     """
     settings = load_settings()
 
-    print("single model settings:::", settings)
-
     return create_model(
         settings["model_provider"],
         settings.get("api_key"),
@@ -50,8 +48,6 @@ def get_agent() -> Agent:
         An Agent instance with tools, chat history, and instructions.
     """
     model = load_model()
-
-    print("single model used:::", model)
 
     return Agent(
         model=model,

@@ -2,7 +2,7 @@ import json
 import logging
 import os
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -54,10 +54,7 @@ async def get_column_info(request: ColumnNamesRequest) -> JSONResponse:
 
     if data_source not in metadata["sources"]:
         logger.warning("Data source not found: %s", data_source)
-        return JSONResponse(
-            content={"error": "Data source not found"},
-            status_code=404,
-        )
+        raise HTTPException(status_code=404, detail="Data source not found")
 
     columns = metadata["sources"][data_source].get("columns", [])
 
