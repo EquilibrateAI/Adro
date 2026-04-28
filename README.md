@@ -271,104 +271,94 @@ export default nextConfig;
 adro/                      # Monorepo root
 ├── frontend/              # Next.js/React application
 │   ├── app/               # Next.js App Router pages
-│   │   ├── data/         # Data management routes
-│   │   ├── dashboard/    # AI Dashboard routes
-│   │   ├── modeling/    # Prediction & Optimization routes
-│   │   └── settings/    # Settings routes
-│   ├── components/       # React components
-│   │   ├── data/        # Data management components
-│   │   ├── dashboard/   # Dashboard components
-│   │   ├── modeling/   # Modeling components
-│   │   └── ui/        # Shared UI components
-│   ├── services/         # API clients and state
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── dashboard2/
+│   │   │   └── page.tsx
+│   │   ├── data/
+│   │   │   └── page.tsx
+│   │   ├── modeling/
+│   │   │   └── page.tsx
+│   │   ├── settings/
+│   │   │   └── page.tsx
+│   │   ├── signup/
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── providers.tsx
+│   │   └── globals.css
+│   ├── components/        # React components
+│   │   ├── dashboard/    # Dashboard components
+│   │   │   ├── chart/
+│   │   │   ├── dashboard/
+│   │   │   ├── sidebar/
+│   │   │   └── text-mode/
+│   │   ├── data/         # Data components
+│   │   │   ├── data-explore/
+│   │   │   ├── files/
+│   │   │   └── sidebar/
+│   │   ├── modeling/     # Modeling components
+│   │   │   ├── optimise/
+│   │   │   ├── predict/
+│   │   │   └── sidebars/
+│   │   ├── ui/          # Shared UI components
+│   │   │   ├── loaders/
+│   │   │   └── ...
+│   │   ├── nav-*.tsx
+│   │   ├── settings/
+│   │   └── ...
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/             # Utility functions
+│   ├── services/        # API services
 │   │   ├── api/        # API endpoint functions
-│   │   └── utils/     # Stores and utilities
-│   └── public/         # Static assets
+│   │   └── utils/      # Zustand stores
+│   ├── public/         # Static assets
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
 ├── backend/             # Python/FastAPI application
 │   ├── app/
 │   │   ├── api/       # API route handlers
-│   │   │   ├── data/       # Data endpoints
-│   │   │   ├── dashboard/  # Dashboard endpoints
-│   │   │   ├── modeling/  # Prediction & Optimization
-│   │   │   └── settings/  # Settings endpoints
-│   │   └── utils/    # Business logic
-│   │       ├── dashboard/    # Dashboard helpers
-│   │       ├── prediction/  # ML models
-│   │       └── optimization/ # Optuna optimizers
-│   └── requirements.txt  # Python dependencies
-├── CONTRIBUTING.md     # Contribution guidelines
-├── LICENSE            # Apache 2.0 license
-└── README.md         # This file
+│   │   │   ├── column_information.py
+│   │   │   ├── data_source.py
+│   │   │   ├── dashboard/
+│   │   │   │   ├── chat_history/
+│   │   │   │   └── llm_engine/
+│   │   │   ├── data/
+│   │   │   │   ├── chart_data_generation.py
+│   │   │   │   ├── data_cleaning.py
+│   │   │   │   ├── data_table.py
+│   │   │   │   ├── file_uploader.py
+│   │   │   │   └── database/
+│   │   │   │       ├── connection.py
+│   │   │   │       ├── postgres_helper.py
+│   │   │   │       └── postgres_table.py
+│   │   │   ├── modeling/
+│   │   │   │   ├── optimization/
+│   │   │   │   └── prediction/
+│   │   │   └── settings/
+│   │   ├── utils/    # Business logic
+│   │   │   ├── dashboard/
+│   │   │   │   ├── chat_history/
+│   │   │   │   └── llm_engine/
+│   │   │   ├── optimization/
+│   │   │   ├── prediction/
+│   │   │   │   └── ml_models/
+│   │   │   │       └── xg_boost/
+│   │   │   ├── process_data/
+│   │   │   │   ├── data_cleaning/
+│   │   │   │   ├── data_ingestion/
+│   │   │   │   └── meta_anamoly/
+│   │   │   └── settings/
+│   │   ├── config.py
+│   │   └── main.py
+│   ├── requirements.txt
+│   └── README.md
+├── CONTRIBUTING.md
+├── LICENSE
+└── README.md
 ```
-│   │   ├── chart/           # Chart builder
-│   │   ├── files/           # File upload components
-│   │   └── filter/          # Filter components
-│   ├── dashboard/           # Dashboard components
-│   │   ├── chart/           # Chart display components
-│   │   ├── chat/            # Chat interface components
-│   │   ├── dashboard/       # Dashboard view components
-│   │   └── sidebar/         # Dashboard sidebar
-│   ├── modeling/            # Modeling components
-│   │   ├── predict/         # Prediction components
-│   │   │   ├── predict.tsx
-│   │   │   ├── predict-sec-one.tsx
-│   │   │   ├── predict-sec-two.tsx
-│   │   │   └── predict-sec-three.tsx
-│   │   ├── optimise/        # Optimization components
-│   │   │   ├── optimise.tsx
-│   │   │   ├── optimise-sec-one.tsx
-│   │   │   ├── optimise-sec-two.tsx
-│   │   │   └── optimise-sec-three.tsx
-│   │   └── sidebars/        # Modeling sidebars
-│   │       ├── sidebar-left-predict.tsx
-│   │       └── sidebar-left-optimise.tsx
-│   └── ui/                  # Shared UI components
-│       ├── button.tsx
-│       ├── input.tsx
-│       ├── card.tsx
-│       ├── dialog.tsx
-│       ├── dropdown-menu.tsx
-│       └── ...
-├── hooks/                   # Custom React hooks
-│   ├── useDataSources.ts
-│   ├── useColumnInfo.ts
-│   └── ...
-├── lib/                     # Utility functions
-│   ├── utils.ts             # General utilities
-│   └── constants.ts         # App constants
-├── services/                # API services
-│   └── utils/               # Zustand stores & API helpers
-│       ├── data/            # Data API helpers
-│       │   ├── fetch-data-sources.ts
-│       │   ├── fetch-connection-details.ts
-│       │   ├── get-column-info.ts
-│       │   ├── clean-data.ts
-│       │   └── file-upload.ts
-│       ├── dashboard/       # Dashboard API helpers
-│       │   ├── fetch-text-mode-data.ts
-│       │   ├── plot-chart-data.ts
-│       │   └── generate-dashboard.ts
-│       ├── modeling/        # Modeling API helpers
-│       │   ├── manual-predictor.ts
-│       │   └── manual-optimiser.ts
-│       └── stores/          # Zustand stores
-│           ├── chat-store.ts
-│           ├── generated-chart-data-store.ts
-│           ├── chart-analytics-store.ts
-│           ├── dashboard-store.ts
-│           ├── prediction-store.ts
-│           └── optimization-store.ts
-├── public/                  # Static assets
-│   ├── images/              # Images and icons
-│   └── fonts/               # Custom fonts
-├── .env.example             # Environment variables template
-├── .gitignore               # Git ignore rules
-├── next.config.ts           # Next.js configuration
-├── tailwind.config.ts       # Tailwind CSS configuration
-├── tsconfig.json            # TypeScript configuration
-├── package.json             # Dependencies and scripts
-└── eslint.config.mjs        # ESLint configuration
-```
+
 ---
 
 ## Development
@@ -1070,47 +1060,70 @@ Interactive API docs are available at `http://localhost:8000/docs` once the serv
 ## Project Structure
 
 ```
-app/
-├── config.py                   # CORS, app settings, environment config
-├── main.py                     # FastAPI app init, router includes
-├── api/                        # All API modules
-│   ├── column_information.py   # Prefix /columns
-│   ├── data_source.py          # Prefix /data_sources_info
-│   └── data/                   # Prefix /data
-│       ├── chart_data_generation.py
-│       ├── data_cleaning.py
-│       ├── data_table.py
-│       └── file_uploader.py
-└── utils/                      # Reusable utilities (no API routes)
-    ├── process_data/
-    │   ├── data_cleaning/
-    │   │   ├── clean.py        # Column cleaning, null handling
-    │   │   └── cleanup_config.json
-    │   ├── data_ingestion/
-    │   │   └── create_files.py # CSV → DuckDB conversion
-    │   └── meta_anamoly/
-    │       ├── anomaly.py      # Anomaly detection
-    │       └── metadata.py     # Metadata generation
-    ├── dashboard/
-    │   ├── chat_history/
-    │   │   └── chat_functions.py
-    │   └── llm_engine/
-    │       ├── llm_agent_single.py
-    │       ├── llm_agent_team.py
-    │       └── tools_generation.py
-    ├── model_assistants/
-    │   └── model_helpers.py
-    ├── optimization/
-    │   └── optuna_optimizer.py
-    ├── prediction/
-    │   └── ml_models/xg_boost/
-    │       └── xg_boost_full.py
-    └── settings/
-        └── models.py
-data/                           # Runtime data — gitignored
-├── *.csv
-├── *.duckdb
-└── metadata.json
+backend/
+├── app/
+│   ├── api/                # API route handlers
+│   │   ├── column_information.py
+│   │   ├── data_source.py
+│   │   ├── dashboard/
+│   │   │   ├── chat_history/
+│   │   │   │   └── chathistory.py
+│   │   │   └── llm_engine/
+│   │   │       └── dashboardgeneration.py
+│   │   ├── data/
+│   │   │   ├── chart_data_generation.py
+│   │   │   ├── data_cleaning.py
+│   │   │   ├── data_table.py
+│   │   │   ├── file_uploader.py
+│   │   │   └── database/
+│   │   │       ├── connection.py
+│   │   │       ├── postgres_helper.py
+│   │   │       └── postgres_table.py
+│   │   ├── modeling/
+│   │   │   ├── optimization/
+│   │   │   │   └── optimizer.py
+│   │   │   └── prediction/
+│   │   │       └── ml_model_predictor.py
+│   │   └── settings/
+│   │       ├── api_ping.py
+│   │       └── fetch_settings.py
+│   ├── utils/              # Business logic
+│   │   ├── dashboard/
+│   │   │   ├── chat_history/
+│   │   │   │   └── chat_functions.py
+│   │   │   └── llm_engine/
+│   │   │       ├── json_utils.py
+│   │   │       ├── kill_agent.py
+│   │   │       ├── llm_agent_single.py
+│   │   │       ├── llm_agent_team.py
+│   │   │       └── tools_generation.py
+│   │   ├── model_assistants/
+│   │   │   └── model_helpers.py
+│   │   ├── optimization/
+│   │   │   ├── optimizer_assistant.py
+│   │   │   └── optuna_optimizer.py
+│   │   ├── prediction/
+│   │   │   └── ml_models/
+│   │   │       └── xg_boost/
+│   │   │           ├── correlation.py
+│   │   │           ├── prediction_assistant.py
+│   │   │           ├── xg_boost_full.py
+│   │   │           └── xgboost_predictor.py
+│   │   ├── process_data/
+│   │   │   ├── data_cleaning/
+│   │   │   │   ├── clean.py
+│   │   │   │   └── cleanup_config.json
+│   │   │   ├── data_ingestion/
+│   │   │   │   └── create_files.py
+│   │   │   └── meta_anamoly/
+│   │   │       ├── anomaly.py
+│   │   │       └── metadata.py
+│   │   └── settings/
+│   │       └── models.py
+│   ├── config.py            # CORS, app settings
+│   └── main.py              # FastAPI app init, router includes
+├── requirements.txt
+└── README.md
 ```
 
 ---
