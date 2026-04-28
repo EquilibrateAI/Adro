@@ -807,8 +807,7 @@ Copyright (c) 2024 EquilibrateAI
 ## Support
 
 - **Documentation**: This README and inline code comments
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/EquilibrateAI/Adro/issues)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/EquilibrateAI/Adro/discussions)
+- **Community**: Join our [Discord](https://discord.gg/YOUR_DISCORD_LINK) for discussions and support
 - **Collaborate**: Email us at dev@equilibrateai.com to join as a contributor
 - **Security**: Report vulnerabilities at dev@equilibrateai.com
 
