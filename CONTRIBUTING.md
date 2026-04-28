@@ -85,15 +85,37 @@ We use GitHub issues to track public bugs. Report a bug by opening a new issue; 
 adro/                      # Monorepo root
 ├── frontend/              # Next.js/React application
 │   ├── app/               # Next.js App Router pages
-│   ├── components/         # React components
-│   ├── services/         # API clients and stores
-│   └── public/            # Static assets
-├── backend/               # Python/FastAPI application
+│   │   ├── data/
+│   │   ├── dashboard/
+│   │   ├── dashboard2/
+│   │   ├── modeling/
+│   │   ├── settings/
+│   │   └── signup/
+│   ├── components/       # React components
+│   │   ├── dashboard/
+│   │   ├── data/
+│   │   ├── modeling/
+│   │   ├── ui/
+│   │   └── ...
+│   ├── hooks/
+│   ├── lib/
+│   ├── services/
+│   └── public/
+├── backend/              # Python/FastAPI application
 │   ├── app/
-│   │   ├── api/          # API route handlers
-│   │   └── utils/        # Business logic
-│   └── requirements.txt  # Python dependencies
-└── README.md             # Main documentation
+│   │   ├── api/         # API route handlers
+│   │   │   ├── column_information.py
+│   │   │   ├── data_source.py
+│   │   │   ├── dashboard/
+│   │   │   ├── data/
+│   │   │   ├── modeling/
+│   │   │   └── settings/
+│   │   ├── utils/       # Business logic
+│   │   └── main.py
+│   └── requirements.txt
+├── CONTRIBUTING.md
+├── LICENSE
+└── README.md
 ```
 
 ### Naming Conventions (Frontend)
