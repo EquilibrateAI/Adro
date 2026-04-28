@@ -509,17 +509,17 @@ console.log(messages);
 
 ### API Integration
 
-All backend communication happens through typed service functions in `services/utils/`:
+All backend communication happens through typed service functions in `services/api/`:
 
 ```typescript
 // Example: Fetching data sources
-import { fetchDataSources } from "@/services/utils/data/fetch-data-sources";
+import { fetchDataSources } from "@/services/api/data/sidebar/data-source";
 
 // In a component
 const dataSources = await fetchDataSources();
 
 // Example: Running a prediction
-import { manualPredictor } from "@/services/utils/modeling/manual-predictor";
+import { manualPredictor } from "@/services/api/modeling/predict/manual_predictor";
 
 const result = await manualPredictor({
   file: "sales_data.csv",
@@ -534,32 +534,18 @@ const result = await manualPredictor({
 
 ### /data – Data Management
 
-The `/data` section provides comprehensive data management capabilities for connecting to databases, uploading files, viewing tables, cleaning data, and creating charts.
+The `/data` section provides comprehensive data management capabilities for uploading files, viewing tables, cleaning data, and creating charts.
 
 #### 1. Sidebar (Connections & Files)
 
 - **Key Component**: `components/data/sidebar/data-sidebar.tsx`
 - **Responsibilities**:
-  - Display saved database connections by calling `fetchConnectionDetails` → `/data/connections`
-  - On connection selection: call `fetchPostgresTableInfo` → `/data/postgres/table-info`
+  - Display saved files by calling `fetchDataSources` → `/data_sources_info/datasources-metadata`
   - File upload integration: `components/data/files/upload/*` → `/data/file_upload`
 
-#### 2. File Upload & Database Connection
+> **Note**: Database connection feature (PostgreSQL) is under construction. Users can extend and integrate it by improving the existing connection helpers in the codebase.
 
-**File Upload Flow**:
-
-1. User selects CSV or DuckDB file
-2. Upload helper calls `/data/file_upload`
-3. On success, sidebar refreshes data sources
-
-**Database Connection Flow**:
-
-1. User enters credentials in sidebar form
-2. `testConnection` → `/data/test-connection`
-3. If valid: `saveConnectionDetails` → `/data/import-postgres`
-4. Imported tables appear alongside uploaded files
-
-#### 3. Data Table
+#### 2. File Upload
 
 After selecting a table/file:
 
@@ -787,55 +773,13 @@ DATABASE_URL=postgresql://...
 
 Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### Getting Started
-
-1. **Fork** the repository
-2. **Clone** your fork
-3. **Create** a feature branch
-
-### Development Workflow
-
-1. **Clone** your fork and install dependencies: `npm install`. This will automatically set up your local Git hooks.
-2. **Setup Env**: Run `cp .env.example .env` and configure your local backend URLs.
-3. **Branching**: Create a feature branch: `git checkout -b feature/amazing-feature`.
-4. **Committing**: When you run `git commit`, our automated hooks will format your code. If there are linting errors that can't be fixed automatically, the commit will be blocked until you fix them.
-5. **Submit**: Use the provided **Pull Request Template** when opening a PR. It contains a checklist to ensure your contribution meets our quality standards.
-
-### Issue & PR Templates
-
-We use standardized templates for **Bug Reports**, **Feature Requests**, and **Pull Requests**. Please fill them out completely to help us review and merge your changes faster.
-
-### Code Style
-
-- **TypeScript**: Strict mode, use interfaces over types
-- **React**: Functional components, hooks over class components
-- **Naming**: camelCase for variables, PascalCase for components
-- **Imports**: Use path aliases (`@/components/...`)
-- **Formatting**: Prettier handles formatting automatically
-
-### Pull Request Guidelines
-
-1. Fill out the PR template completely
-2. Include screenshots for UI changes
-3. Update documentation if needed
-4. Ensure all tests pass
-5. Request review from maintainers
-
----
-
-## Code of Conduct
-
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
-
-By participating, you are expected to uphold this code. Please report unacceptable behavior to contact@adro.ai.
-
 ---
 
 ## Security
 
-Found a security vulnerability? Please read our [Security Policy](SECURITY.md) for reporting instructions.
+Found a security vulnerability? Please email dev@equilibrateai.com with details.
 
-**Do NOT** report security vulnerabilities in public issues. Email security@adro.ai instead.
+**Do NOT** report security vulnerabilities in public issues.
 
 ---
 
@@ -856,15 +800,17 @@ Join our community:
 
 Distributed under the **Apache License 2.0**. See [LICENSE](LICENSE) for more information.
 
-Copyright (c) 2024 Pavan
+Copyright (c) 2024 EquilibrateAI
 
 ---
 
 ## Support
 
 - **Documentation**: This README and inline code comments
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/yourusername/adro/issues)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/yourusername/adro/discussions)
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/EquilibrateAI/Adro/issues)
+- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/EquilibrateAI/Adro/discussions)
+- **Collaborate**: Email us at dev@equilibrateai.com to join as a contributor
+- **Security**: Report vulnerabilities at dev@equilibrateai.com
 
 ---
 
@@ -1214,21 +1160,8 @@ docs/DEV-101-update-readme
 
 ---
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/DEV-123-your-feature`
-3. Make your changes and ensure they pass linting: `black . && flake8 .`
-4. Commit your changes: `git commit -m "feat: add your feature"`
-5. Push to your branch: `git push origin feature/DEV-123-your-feature`
-6. Open a pull request
-
-Please ensure all code follows the style guidelines in the [Code Style](#code-style) section before submitting a pull request. PRs that fail linting or are missing type hints and docstrings will be asked to revise.
-
----
-
 ## License
 
 Distributed under the **Apache License 2.0**. See [LICENSE](LICENSE) for more information.
 
-Copyright (c) 2024 Pavan
+Copyright (c) 2024 EquilibrateAI
