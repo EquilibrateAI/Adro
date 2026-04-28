@@ -54,8 +54,6 @@ def ping(data: Ping):
         "baseUrl": data.baseUrl,
     }
 
-    print("SAVING SETTINGS:", payload)
-
     try:
         save_model(payload)
     except Exception:

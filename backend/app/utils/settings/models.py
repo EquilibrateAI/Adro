@@ -52,7 +52,6 @@ def create_model(provider, api_key=None, port=None, model=None, baseUrl=None):
         )
 
     elif provider == "vllm":
-        print("USING VLLM WITH:", baseUrl)
 
         if not baseUrl:
             raise ValueError("baseUrl is required for vllm")

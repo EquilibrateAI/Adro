@@ -7,11 +7,14 @@ This example shows how to:
 3. Handle the cancelled response
 """
 
+import logging
 import threading
 
 from agno.agent import Agent
 from agno.run.agent import RunEvent
 from agno.run.base import RunStatus
+
+logger = logging.getLogger(__name__)
 
 run_completed = threading.Event()
 
@@ -37,11 +40,12 @@ def long_running_task(agent: Agent, query: str, run_id_container: dict):
                 run_id_container["run_id"] = chunk.run_id
 
             if chunk.event == RunEvent.run_content:
+                logger.debug("%s", chunk.content)
                 print(chunk.content, end="", flush=True)
                 content_pieces.append(chunk.content)
             # run cancelled -> emit RunEvent.run_cancelled
             elif chunk.event == RunEvent.run_cancelled:
-                print(f"\nRun was cancelled: {chunk.run_id}")
+                logger.info("Run was cancelled: %s", chunk.run_id)
                 run_id_container["result"] = {
                     "status": "cancelled",
                     "run_id": chunk.run_id,
@@ -81,29 +85,29 @@ def long_running_task(agent: Agent, query: str, run_id_container: dict):
 
 def cancel_after_delay(agent: Agent, run_id_container: dict, delay_seconds: int):
     """Cancel the agent run after delay, unless run completes first."""
-    print(f"Will cancel run in {delay_seconds} seconds...")
+    logger.info("Will cancel run in %s seconds", delay_seconds)
 
     # Wait for delay OR until run completes (whichever comes first)
     if run_completed.wait(timeout=delay_seconds):
-        print("Run completed before cancellation delay - skipping cancel")
+        logger.info("Run completed before cancellation delay - skipping cancel")
         return
 
     # If we get here, timeout elapsed and run is still going
     run_id = run_id_container.get("run_id")
     if run_id:
-        print(f"Cancelling run: {run_id}")
+        logger.info("Cancelling run: %s", run_id)
         success = agent.cancel_run(run_id)
         if success:
-            print(f"Run {run_id} marked for cancellation")
+            logger.info("Run %s marked for cancellation", run_id)
         else:
-            print(f"Failed to cancel run {run_id}")
+            logger.warning("Failed to cancel run %s", run_id)
 
 
 def kill_function(agent: Agent, query: str):
     """Main function demonstrating agent run cancellation."""
 
-    print("Starting agent run cancellation example...")
-    print("=" * 50)
+    logger.info("Starting agent run cancellation example")
+    logger.debug("=" * 50)
 
     # Container to share run_id between threads
     run_id_container = {}
@@ -124,39 +128,38 @@ def kill_function(agent: Agent, query: str):
     )
 
     # Start both threads
-    print("Starting agent run thread...")
+    logger.debug("Starting agent run thread...")
     agent_thread.start()
 
-    print("Starting cancellation thread...")
+    logger.debug("Starting cancellation thread...")
     cancel_thread.start()
 
     # Wait for both threads to complete
-    print("Waiting for threads to complete...")
+    logger.debug("Waiting for threads to complete...")
     agent_thread.join()
     cancel_thread.join()
 
     # Print the results
-    print("\n" + "=" * 50)
-    print("RESULTS:")
-    print("=" * 50)
+    logger.debug("\n" + "=" * 50)
+    logger.info("RESULTS:")
+    logger.debug("=" * 50)
 
     result = run_id_container.get("result")
     if result:
-        print(f"Status: {result['status']}")
-        print(f"Run ID: {result['run_id']}")
-        print(f"Was Cancelled: {result['cancelled']}")
+        logger.info("Status: %s, Run ID: %s, Cancelled: %s",
+            result['status'], result['run_id'], result['cancelled'])
 
         if result.get("error"):
-            print(f"Error: {result['error']}")
+            logger.error("Error: %s", result['error'])
         else:
-            print(f"Content Preview: {result['content']}")
+            logger.debug("Content Preview: %.100s", result['content'])
 
         if result["cancelled"]:
-            print("\nSUCCESS: Run was successfully cancelled!")
+            logger.info("SUCCESS: Run was successfully cancelled!")
         else:
-            print("\nWARNING: Run completed before cancellation")
+            logger.warning("WARNING: Run completed before cancellation")
     else:
-        print("No result obtained - check if cancellation happened during streaming")
+        logger.warning("No result obtained")
 
-    print("\nExample completed!")
+    logger.info("Example completed!")
     return result

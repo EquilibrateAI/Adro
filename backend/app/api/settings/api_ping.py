@@ -24,7 +24,7 @@ def validate(
         if model_provider == "ollama":
 
             if not port:
-                print("port required")
+                logger.warning("port required for ollama")
                 raise HTTPException(status_code=500, detail="port required")
 
             r = requests.get(
@@ -32,7 +32,7 @@ def validate(
             )  # health check
 
             if r.status_code != 200:
-                print("ollama not responding")
+                logger.warning("ollama not responding on port %s", port)
                 raise HTTPException(
                     status_code=401, detail=f"Ollama not responding on port {port}"
                 )
@@ -51,7 +51,7 @@ def validate(
 
         # llama.cpp model provider
         elif model_provider == "llama.cpp":
-            print("llama cpp called")
+            logger.debug("llama cpp validation called")
 
             if not port:
                 raise HTTPException(status_code=500, detail="port required")
@@ -98,14 +98,14 @@ def validate(
                 url = f"{baseUrl}/v1/models"
             try:
                 r = requests.get(url, timeout=3)
-                print("baseurl:::", f"{baseUrl}")
+                logger.debug("VLLM baseurl: %s", baseUrl)
             except requests.exceptions.RequestException:
                 raise HTTPException(
                     status_code=401, detail=f"VLLM not reachable at {baseUrl}"
                 )
 
             if r.status_code != 200:
-                print("status code:::", r.status_code)
+                logger.warning("VLLM status code: %s", r.status_code)
                 raise HTTPException(
                     status_code=401, detail=f"VLLM not responding at {url}"
                 )
