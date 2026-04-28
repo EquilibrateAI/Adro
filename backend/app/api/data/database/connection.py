@@ -1,11 +1,13 @@
 from fastapi import HTTPException, APIRouter
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
+import logging
 from pydantic import BaseModel
 import os
 import json
 
 router = APIRouter(tags=["Connections"])
+logger = logging.getLogger(__name__)
 
 
 class ConnectionDetails(BaseModel):
@@ -165,10 +167,10 @@ def connect_database(details: ConnectionDetails):
 
             if query is not None:
                 result = connection.execute(query)
-                print("\n--- Database Structure ---")
+                logger.debug("--- Database Structure ---")
                 for schema, table in result:
-                    print(f"Schema: {schema}, Table: {table}")
-                print("------------------------\n")
+                    logger.debug("Schema: %s, Table: %s", schema, table)
+                logger.debug("------------------------")
 
         return {"message": "Connection successful."}
     except HTTPException as e:
@@ -237,7 +239,7 @@ def list_connections():
         HTTPException: On file I/O or unexpected failure.
     """
     try:
-        print("Reading connections from:", connection_details_path)
+        logger.debug("Reading connections from: %s", connection_details_path)
         if not os.path.exists(connection_details_path):
             return {"connections": []}
         with open(connection_details_path, "r") as f:

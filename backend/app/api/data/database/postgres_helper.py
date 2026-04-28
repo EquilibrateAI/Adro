@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Body
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
+import logging
 from .connection import get_db_url, ConnectionDetails
 import os
 import pandas as pd
@@ -13,6 +14,8 @@ from utils.process_data.data_ingestion.create_files import (
 )
 import polars as pl
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 import json
 
 router = APIRouter(tags=["Postgres Helper"])
@@ -107,10 +110,10 @@ async def get_postgres_schemas(details: ConnectionDetails = Body(...)):
         HTTPException: On connection or query failure.
     """
     try:
-        print("details are:::", details)
+        logger.debug("Database details: %s", details)
         db_url = get_db_url(details)
         schemas = get_schemas_and_tables(db_url, details)
-        print("schemas are:::", schemas)
+        logger.debug("Schemas: %s", schemas)
         return {"db_name": details.database, "schemas": schemas}
     except HTTPException as e:
         raise e
@@ -137,7 +140,7 @@ async def import_postgres_table(details: ImportDetails):
         db_url = get_db_url(details)
 
         base_filename = f"{details.schema}_{details.table}".replace(" ", "_")
-        print("base_filename:::", base_filename)
+        logger.debug("Import filename: %s", base_filename)
         csv_filename = f"{base_filename}.csv"
 
         ensure_data_folder()

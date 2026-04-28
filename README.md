@@ -172,50 +172,27 @@ git clone git@github.com:yourusername/adro.git
 cd adro/my-adro
 ```
 
-### 2. Install Dependencies
+Then start the production server:
 
 ```bash
-npm install
+npm start
 ```
 
-Or if using yarn:
+### Viewing Logs
+
+Backend logs appear in the terminal when running the development server:
 
 ```bash
-yarn install
+# Terminal 1 - Backend
+cd backend/app
+uvicorn main:app --reload --port 8000
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
 ```
 
-Or if using pnpm:
-
-```bash
-pnpm install
-```
-
-### 3. Environment Setup
-
-Copy the example environment file and fill in your configuration:
-
-```bash
-cp .env.example .env
-```
-
-```env
-# Backend API URL (required)
-NEXT_PUBLIC_API_URL=http://localhost:8000
-
-# Application name (optional)
-NEXT_PUBLIC_APP_NAME=Adro
-
-# API Keys (optional - add as needed)
-ANTHROPIC_API_KEY=your_api_key_here
-OPENAI_API_KEY=your_openai_key_here
-
-# Feature flags (optional)
-NEXT_PUBLIC_ENABLE_DEBUG=false
-NEXT_PUBLIC_ENABLE_TELEMETRY=true
-```
-
-> [!TIP]
-> Always use the `.env.example` as a template for your local `.env` file. It contains all the necessary keys required to run the application and is kept up-to-date as new features are added.
+Logs include API requests, errors, data processing details, and model interactions.
 
 ---
 

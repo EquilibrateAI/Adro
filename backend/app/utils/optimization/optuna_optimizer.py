@@ -1,3 +1,4 @@
+import logging
 import os
 import pickle
 from typing import Dict, Tuple, Optional, List
@@ -10,6 +11,8 @@ from ..prediction.ml_models.xg_boost.xg_boost_full import (
     train_model,
     _load_df,
 )
+
+logger = logging.getLogger(__name__)
 
 optimization_folder = os.path.dirname(__file__)
 utils_folder = os.path.dirname(optimization_folder)
@@ -33,7 +36,7 @@ def optimize_inputs_for_target(
     """Run Optuna optimization to find best predictor values for a target."""
 
     if not os.path.exists(model_pkl_path):
-        print(f"Model not found at {model_pkl_path}, training new model...")
+        logger.info("Model not found at %s, training new model", model_pkl_path)
 
         if datasource_name and targets and predictors:
             df = _load_df(
@@ -53,7 +56,7 @@ def optimize_inputs_for_target(
                 "Model not found and insufficient training parameters provided"
             )
     else:
-        print(f"Loading model from: {model_pkl_path}")
+        logger.info("Loading model from: %s", model_pkl_path)
 
     with open(model_pkl_path, "rb") as f:
         complete_model = pickle.load(f)

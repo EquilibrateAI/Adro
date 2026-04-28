@@ -852,6 +852,34 @@ router = APIRouter(tags=["Data Cleaning"])
 async def clean_data(request: CleanDataRequest):
     # ... implementation
     pass
+```
+
+#### Logging
+
+All backend modules use Python's built-in logging module:
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+# Use appropriate log levels:
+logger.debug("Detailed development info")  # Verbose, only during dev
+logger.info("Normal operation")            # General flow
+logger.warning("Something unexpected")   # Recoverable issue
+logger.error("Failed operation")         # Error occurred
+logger.exception(e)                   # Error + automatic stack trace
+
+# NEVER use print() for logging
+# Good: logger.info("Processing file: %s", filename)
+# Bad:  print("Processing file:", filename)
+```
+
+**Why logging over print()?**
+- Can be filtered by level (debug, info, warning, error)
+- Shows module name in output
+- `logger.exception()` automatically captures stack traces
+- Can be redirected to files or external services later
 
 # Good: Logging
 import logging

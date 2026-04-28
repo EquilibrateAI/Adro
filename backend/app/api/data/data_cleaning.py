@@ -104,8 +104,7 @@ async def clean_data(request: CleanDataRequest) -> JSONResponse:
         )
 
     except Exception as e:
-        logger.error("Error during data cleaning: %s", str(e))
-        traceback.print_exc()
+        logger.exception("Error during data cleaning: %s", str(e))
         return JSONResponse(
             status_code=500,
             content={"error": f"Data cleaning failed: {str(e)}"},

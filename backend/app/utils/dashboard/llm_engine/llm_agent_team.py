@@ -47,8 +47,7 @@ def load_model() -> Any:
         settings.get("model"),
         settings.get("baseUrl"),
     )
-    print("team model used:::", model)
-    print("team model settings used:::", settings)
+    
     logger.info("Loaded model: %s", model)
     logger.debug("Model type: %s", type(model))
     return model
